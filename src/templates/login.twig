@@ -1,0 +1,75 @@
+{% extends '_layouts/base' %}
+{% import '_includes/forms' as forms %}
+{% do view.registerAssetBundle('jorenvanhee\\templateguard\\AssetBundle') %}
+
+{% set title = 'Login' %}
+{% set bodyClass = 'login-page' %}
+{% set error = craft.app.session.getFlash('error') %}
+
+{% set formHtml %}
+    <main class="login-block">
+
+        <h1 class="login-title">
+            {{ 'Protected'|t('template-guard') }}
+        </h1>
+
+        <form
+            id="login-form"
+            method="post"
+            action="{{ craft.request.getParam('ref') }}"
+        >
+
+            {{ csrfInput({ name: 'csrf-token' }) }}
+
+            {{ forms.passwordField({
+                id: 'password',
+                name: 'password',
+                placeholder: 'Password'|t('template-guard'),
+                autocomplete: 'current-password',
+                inputAttributes: {
+                    aria: {
+                        label: 'Password'|t('template-guard'),
+                        required: 'true',
+                    },
+                },
+            }) }}
+
+            <div class="buttons">
+                <button id="submit" class="btn submit" type="submit">
+                    {{ 'Login'|t('template-guard') }}
+                </button>
+            </div>
+        </form>
+
+
+        {% if error %}
+            <div id="login-errors" role="alert">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+    </main>
+{% endset %}
+
+{% set noCookiesHtml %}
+    <main>
+        <div class="message-container no-access">
+            <div class="pane notice">
+                <p>{{ 'Cookies must be enabled to access this page.'|t('template-guard') }}</p>
+            </div>
+        </div>
+    </main>
+{% endset %}
+
+{% block body %}
+    <script type="text/javascript">
+        var cookieTest = 'CraftCookieTest='+Math.floor(Math.random() * 1000000);
+        document.cookie = cookieTest;
+        if (document.cookie.search(cookieTest) != -1) {
+            document.cookie = cookieTest + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            document.write({{ formHtml|json_encode|raw }});
+        } else {
+            document.write({{ noCookiesHtml|json_encode|raw }});
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,38 @@
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-block {
+    width: 100%;
+    max-width: 300px;
+}
+
+.login-title {
+    text-align: center;
+    font-size: 3em;
+    word-wrap: break-word;
+}
+
+#login-form .submit {
+    padding: 14px 16px;
+    width: 100%;
+    height: auto;
+}
+
+.passwordwrapper {
+    border-radius: 5px;
+}
+
+.passwordwrapper #password {
+    padding: 14px 16px;
+    border-radius: inherit;
+}
+
+#login-errors {
+    text-align: center;
+    color: #CF1124;
+    margin-top: 1em;
+}

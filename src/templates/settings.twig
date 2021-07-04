@@ -1,0 +1,19 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.autosuggestField({
+    first: true,
+    label: 'Template',
+    instructions: 'This template will be used for the login page. Leave empty for the default.',
+    name: 'template',
+    suggestions: craft.cp.getTemplateSuggestions(),
+    value: settings.template,
+}) }}
+
+{{ forms.textField({
+    label: 'Login route',
+    instructions: 'The URI for the login page.',
+    name: 'loginRoute',
+    value: settings.loginRoute,
+    required: true,
+    errors: settings.getErrors('loginRoute')
+}) }}

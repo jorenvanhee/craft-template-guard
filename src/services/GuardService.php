@@ -60,6 +60,8 @@ class GuardService extends Component
         $loginAttempts = Plugin::getInstance()->loginAttempt;
 
         if (!Craft::$app->request->validateCsrfToken()) {
+            $this->_setError('Invalid CSRF token.');
+
             return $this->_redirectToLoginPage();
         }
 

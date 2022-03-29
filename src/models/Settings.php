@@ -10,7 +10,7 @@ class Settings extends Model
 
     public $loginRoute = 'template-guard/login';
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['loginRoute'], 'required'],

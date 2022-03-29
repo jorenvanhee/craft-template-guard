@@ -6,7 +6,7 @@
 {% set bodyClass = 'login-page' %}
 {% set error = craft.app.session.getFlash('error') %}
 
-{% set formHtml %}
+{% block body %}
     <main class="login-block">
 
         <h1 class="login-title">
@@ -49,27 +49,4 @@
         {% endif %}
 
     </main>
-{% endset %}
-
-{% set noCookiesHtml %}
-    <main>
-        <div class="message-container no-access">
-            <div class="pane notice">
-                <p>{{ 'Cookies must be enabled to access this page.'|t('template-guard') }}</p>
-            </div>
-        </div>
-    </main>
-{% endset %}
-
-{% block body %}
-    <script type="text/javascript">
-        var cookieTest = 'CraftCookieTest='+Math.floor(Math.random() * 1000000);
-        document.cookie = cookieTest;
-        if (document.cookie.search(cookieTest) != -1) {
-            document.cookie = cookieTest + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            document.write({{ formHtml|json_encode|raw }});
-        } else {
-            document.write({{ noCookiesHtml|json_encode|raw }});
-        }
-    </script>
 {% endblock %}

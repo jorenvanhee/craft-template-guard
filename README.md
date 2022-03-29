@@ -3,6 +3,7 @@ Password protect any page or entry in Craft CMS.
 
 - Protect one or more pages.
 - Protect multiple entries each with their own password.
+- Customize the login page.
 
 ## Quick start
 
@@ -29,6 +30,12 @@ You can also use a password that was stored on the entry.
 
 ```twig
 {% do craft.templateGuard.protect(entry.myPasswordField) %}
+```
+
+Provide multiple passwords: any of the passwords provided in the array can be used to log in.
+
+```twig
+{% do craft.templateGuard.protect(['passwords1', 'passwords2']) %}
 ```
 
 #### Protect multiple pages with the same password
@@ -61,11 +68,11 @@ This plugin gives you access to a protect method in your templates. This will re
 
 ### Arguments
 
-#### Password
+#### Password (string, array)
 
-The password your users need to provide before accessing the page. The page will not be protected when the password is empty.
+The password your users need to provide before accessing the page. You can also provide an array of passwords. The page will not be protected when the password is an empty string or array.
 
-#### Key
+#### Key (string - optional)
 
 You can identify a protected area on your site using the key argument. When logged in to a page with a certain key, other pages using the same key will also be accessible. The current url is used as the default key.
 

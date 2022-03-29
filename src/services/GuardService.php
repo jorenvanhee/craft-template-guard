@@ -13,17 +13,18 @@ class GuardService extends Component
     const COOKIE_NAME = 'CraftTemplateGuard';
     const MAX_KEYS = 10;
 
-    public function protect(?string $password = null, ?string $key = null)
+    public function protect(array $passwords = [], ?string $key = null)
     {
         $key = $this->_generateKey($key);
         $passwordAttempt = Craft::$app->request->getParam('password');
+        $passwords = array_filter($passwords);
 
-        if (!$password || $this->_loggedIn($key)) {
+        if (empty($passwords) || $this->_loggedIn($key)) {
             return;
         }
 
         if ($passwordAttempt) {
-            return $this->_login($key, $password, $passwordAttempt);
+            return $this->_login($key, $passwords, $passwordAttempt);
         }
 
         $this->_redirectToLoginPage();
@@ -54,7 +55,7 @@ class GuardService extends Component
 
     private function _login(
         string $key,
-        string $password,
+        array $passwords,
         string $passwordAttempt
     ) {
         $loginAttempts = Plugin::getInstance()->loginAttempt;
@@ -71,7 +72,7 @@ class GuardService extends Component
             return $this->_redirectToLoginPage();
         }
 
-        if ($password !== $passwordAttempt) {
+        if (!in_array($passwordAttempt, $passwords)) {
             $loginAttempts->register($key);
 
             $this->_setError('Invalid password.');

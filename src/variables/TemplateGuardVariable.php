@@ -6,8 +6,8 @@ use jorenvanhee\templateguard\Plugin;
 
 class TemplateGuardVariable
 {
-    public function protect(?string $password = null, ?string $key = null)
+    public function protect($passwords = null, ?string $key = null)
     {
-        Plugin::getInstance()->guard->protect($password, $key);
+        Plugin::getInstance()->guard->protect((array) $passwords, $key);
     }
 }

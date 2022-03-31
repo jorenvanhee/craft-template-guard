@@ -10,7 +10,7 @@ use jorenvanhee\templateguard\Plugin;
 
 class SessionsController extends Controller
 {
-    protected $allowAnonymous = self::ALLOW_ANONYMOUS_LIVE;
+    protected array|bool|int $allowAnonymous = self::ALLOW_ANONYMOUS_LIVE;
 
     public function actionCreate(): Response
     {

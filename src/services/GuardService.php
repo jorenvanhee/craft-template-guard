@@ -50,7 +50,8 @@ class GuardService extends Component
 
         $loginUrl = UrlHelper::siteUrl($route, $params);
 
-        Craft::$app->response->redirect($loginUrl)->send();
+        Craft::$app->response->redirect($loginUrl);
+        Craft::$app->end();
     }
 
     private function _login(

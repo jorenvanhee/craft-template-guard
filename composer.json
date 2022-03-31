@@ -16,7 +16,8 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.0.0"
+        "craftcms/cms": "^4.0.0-beta.3",
+        "php": "^8.0.2"
     },
     "autoload": {
         "psr-4": {
@@ -38,6 +39,13 @@
         "codeception/module-asserts": "^1.0.0",
         "vlucas/phpdotenv": "^3.0",
         "codeception/module-yii2": "^1.1",
-        "codeception/module-rest": "^1.0.0"
-    }
+        "codeception/module-rest": "^1.0.0",
+        "phpstan/phpstan": "^1.5",
+        "craftcms/rector": "dev-main"
+    },
+    "scripts": {
+        "phpstan": "phpstan"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

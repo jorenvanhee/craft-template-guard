@@ -14,7 +14,7 @@ use yii\base\Event;
 
 class Plugin extends \craft\base\Plugin
 {
-    public $hasCpSettings = true;
+    public bool $hasCpSettings = true;
 
     public function init()
     {
@@ -47,12 +47,12 @@ class Plugin extends \craft\base\Plugin
         );
     }
 
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?\craft\base\Model
     {
         return new Settings();
     }
 
-    protected function settingsHtml()
+    protected function settingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate(
             'template-guard/settings',

@@ -2,6 +2,7 @@
 
 namespace jorenvanhee\templateguard\controllers;
 
+use Craft;
 use craft\web\Controller;
 use craft\web\Response;
 use craft\web\View;
@@ -14,6 +15,8 @@ class SessionsController extends Controller
     public function actionCreate(): Response
     {
         $settings = Plugin::getInstance()->getSettings();
+
+        Craft::$app->response->headers->set('X-Robots-Tag', 'noindex');
 
         if ($settings->template) {
             return $this->renderTemplate($settings->template, [], View::TEMPLATE_MODE_SITE);

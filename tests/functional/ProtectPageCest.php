@@ -16,6 +16,7 @@ class ProtectPageCest
         $I->amOnPage('protect-page');
         $I->dontSee('Protected page');
         $I->seeInCurrentUrl('template-guard/login');
+        $I->seeHttpHeader('X-Robots-Tag', 'noindex');
     }
 
     public function login(\FunctionalTester $I)

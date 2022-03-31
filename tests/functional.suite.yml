@@ -11,4 +11,6 @@ modules:
         # add a framework module here
         - \Helper\Functional
         - \craft\test\Craft
+        - REST:
+            depends: \craft\test\Craft
     step_decorators: ~        

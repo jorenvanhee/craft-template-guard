@@ -17,3 +17,21 @@
     required: true,
     errors: settings.getErrors('loginRoute')
 }) }}
+
+{{ forms.textField({
+    label: 'Max attempts',
+    instructions: 'Maximum allowed failed login attempts.',
+    name: 'maxAttempts',
+    value: settings.maxAttempts,
+    required: true,
+    errors: settings.getErrors('maxAttempts')
+}) }}
+
+{{ forms.textField({
+    label: 'Max attempts period in seconds',
+    instructions: 'Over what period of time should the failed login attempts be counted.',
+    name: 'maxAttemptsPeriodInSeconds',
+    value: settings.maxAttemptsPeriodInSeconds,
+    required: true,
+    errors: settings.getErrors('maxAttemptsPeriodInSeconds')
+}) }}

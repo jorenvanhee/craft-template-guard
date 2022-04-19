@@ -94,6 +94,12 @@ return [
         // default. Take a look at `src/templates/login.twig` in the plugin
         // repository to develop your own custom template.
         'template' => '',
+
+        // Maximum allowed failed login attempts.
+        'maxAttempts' => 5,
+
+        // Over what period of time should the failed login attempts be counted.
+        'maxAttemptsPeriodInSeconds' => 300,
     ],
 ];
 ```

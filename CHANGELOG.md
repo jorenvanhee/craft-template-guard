@@ -1,5 +1,8 @@
 # Release Notes for Template Guard
 
+## 1.2.0 - 2022-04-25
+- Make max attempts configurable.
+
 ## 1.1.1 - 2022-03-31
 - Add `X-Robots-Tag: noindex` header to login route.
 

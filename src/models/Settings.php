@@ -10,10 +10,16 @@ class Settings extends Model
 
     public $loginRoute = 'template-guard/login';
 
+    public $maxAttempts = 5;
+
+    public $maxAttemptsPeriodInSeconds = 300;
+
     public function rules()
     {
         return [
-            [['loginRoute'], 'required'],
+            [['loginRoute', 'maxAttempts', 'maxAttemptsPeriodInSeconds'], 'required'],
+            [['maxAttempts'], 'integer', 'min' => 1],
+            [['maxAttemptsPeriodInSeconds'], 'integer', 'min' => 1],
         ];
     }
 }

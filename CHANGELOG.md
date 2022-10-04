@@ -1,5 +1,7 @@
 # Release Notes for Template Guard
 
+## 2.0.0 - 2022-10-04
+
 ## 2.0.0-beta.1 - 2022-03-31
 - Template Guard now requires Craft CMS 4.0.0-beta.3 or newer.
 - Added PHPStan.

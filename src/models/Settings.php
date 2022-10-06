@@ -12,11 +12,24 @@ class Settings extends Model
 
     public $cookieLifetimeInSeconds = 60 * 60;
 
+    public $maxLoginAttempts = 5;
+
+    public $maxLoginAttemptsPeriodInSeconds = 300;
+
     public function rules(): array
     {
         return [
-            [['loginRoute', 'cookieLifetimeInSeconds'], 'required'],
-            [['cookieLifetimeInSeconds'], 'integer', 'min' => '0'],
+            [[
+                'loginRoute',
+                'cookieLifetimeInSeconds',
+                'maxLoginAttempts',
+                'maxLoginAttemptsPeriodInSeconds',
+            ], 'required'],
+            [[
+                'maxLoginAttempts',
+                'maxLoginAttemptsPeriodInSeconds',
+            ], 'integer', 'min' => 1],
+            [['cookieLifetimeInSeconds'], 'integer', 'min' => 0],
         ];
     }
 }

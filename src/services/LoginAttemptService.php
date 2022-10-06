@@ -7,13 +7,11 @@ use craft\helpers\DateTimeHelper;
 use craft\helpers\Db;
 use DateTime;
 use jorenvanhee\templateguard\records\LoginAttempt;
+use jorenvanhee\templateguard\Plugin;
 use yii\base\Component;
 
 class LoginAttemptService extends Component
 {
-    const MAX_ATTEMPTS = 5;
-    const MAX_ATTEMPTS_PERIOD_IN_SECONDS = 300;
-
     public function register(string $key)
     {
         $attempt = new LoginAttempt();
@@ -38,7 +36,7 @@ class LoginAttemptService extends Component
             ->andWhere(['>=', 'dateCreated', Db::prepareDateForDb($start)])
             ->count();
 
-        return $count >= self::MAX_ATTEMPTS;
+        return $count >= Plugin::getInstance()->getSettings()->maxLoginAttempts;
     }
 
     private function _cleanDatabase()
@@ -53,7 +51,7 @@ class LoginAttemptService extends Component
     private function _maxAttemptsPeriodStart(): DateTime
     {
         $period = DateTimeHelper::secondsToInterval(
-            self::MAX_ATTEMPTS_PERIOD_IN_SECONDS
+          Plugin::getInstance()->getSettings()->maxLoginAttemptsPeriodInSeconds
         );
 
         return DateTimeHelper::currentUTCDateTime()->sub($period);

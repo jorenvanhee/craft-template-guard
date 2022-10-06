@@ -10,10 +10,13 @@ class Settings extends Model
 
     public $loginRoute = 'template-guard/login';
 
+    public $cookieLifetimeInSeconds = 60 * 60;
+
     public function rules(): array
     {
         return [
-            [['loginRoute'], 'required'],
+            [['loginRoute', 'cookieLifetimeInSeconds'], 'required'],
+            [['cookieLifetimeInSeconds'], 'integer', 'min' => '0'],
         ];
     }
 }

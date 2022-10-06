@@ -15,5 +15,14 @@
     name: 'loginRoute',
     value: settings.loginRoute,
     required: true,
-    errors: settings.getErrors('loginRoute')
+    errors: settings.getErrors('loginRoute'),
+}) }}
+
+{{ forms.textField({
+    label: 'Cookie lifetime',
+    instructions: 'Cookie lifetime in seconds',
+    name: 'cookieLifetimeInSeconds',
+    value: settings.cookieLifetimeInSeconds,
+    required: true,
+    errors: settings.getErrors('cookieLifetimeInSeconds'),
 }) }}

@@ -108,7 +108,7 @@ class GuardService extends Component
         Craft::$app->response->cookies->add(new Cookie([
             'name' => self::COOKIE_NAME,
             'value' => json_encode($keys),
-            'expire' => time() + (60 * 60),
+            'expire' => time() + Plugin::getInstance()->getSettings()->cookieLifetimeInSeconds,
         ]));
     }
 

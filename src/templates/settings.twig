@@ -15,5 +15,32 @@
     name: 'loginRoute',
     value: settings.loginRoute,
     required: true,
-    errors: settings.getErrors('loginRoute')
+    errors: settings.getErrors('loginRoute'),
+}) }}
+
+{{ forms.textField({
+    label: 'Cookie lifetime',
+    instructions: 'Cookie lifetime in seconds',
+    name: 'cookieLifetimeInSeconds',
+    value: settings.cookieLifetimeInSeconds,
+    required: true,
+    errors: settings.getErrors('cookieLifetimeInSeconds'),
+}) }}
+
+{{ forms.textField({
+    label: 'Max login attempts',
+    instructions: 'Maximum amount of login attempts across a period',
+    name: 'maxLoginAttempts',
+    value: settings.maxLoginAttempts,
+    required: true,
+    errors: settings.getErrors('maxLoginAttempts'),
+}) }}
+
+{{ forms.textField({
+    label: 'Max login attempts period in seconds',
+    instructions: 'Period in seconds used to count the max login attempts',
+    name: 'maxLoginAttemptsPeriodInSeconds',
+    value: settings.maxLoginAttemptsPeriodInSeconds,
+    required: true,
+    errors: settings.getErrors('maxLoginAttemptsPeriodInSeconds'),
 }) }}

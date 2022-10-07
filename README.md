@@ -87,13 +87,22 @@ You can also create a configuration file: `config/template-guard.php`.
 
 return [
     '*' => [
-        // The URI for the login page.
-        'loginRoute' => 'template-guard/login',
-
         // This template will be used for the login page. Leave empty for the
         // default. Take a look at `src/templates/login.twig` in the plugin
         // repository to develop your own custom template.
         'template' => '',
+        
+        // The URI for the login page.
+        'loginRoute' => 'template-guard/login',
+        
+        // Cookie lifetime in seconds.
+        'cookieLifetimeInSeconds' => 60 * 60,
+        
+        // Maximum amount of login attempts across a period.
+        'maxLoginAttempts' => 5,
+        
+        // Period in seconds used to count the max login attempts.
+        'maxLoginAttemptsPeriodInSeconds' => 300,
     ],
 ];
 ```

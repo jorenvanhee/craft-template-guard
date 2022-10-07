@@ -1,5 +1,8 @@
 # Release Notes for Template Guard
 
+## 2.1.0 - 2022-10-07
+- Added more settings: `cookieLifetimeInSeconds`, `maxLoginAttempts` and `maxLoginAttemptsPeriodInSeconds`.
+
 ## 2.0.0 - 2022-10-04
 
 ## 2.0.0-beta.1 - 2022-03-31

@@ -30,6 +30,15 @@ class GuardService extends Component
         $this->_redirectToLoginPage();
     }
 
+    public function logout(?string $key = null): void
+    {
+        if ($key === null) {
+            $this->_removeAllFromCookie();
+        } else {
+            $this->_removeFromCookie($this->_generateKey($key));
+        }
+    }
+
     private function _generateKey(string $key): string
     {
         // The length of the key will be 40 chars (sha1). We'll use this
@@ -100,11 +109,22 @@ class GuardService extends Component
             ...$this->_getKeysFromCookie(), $key
         ], self::MAX_KEYS * -1);
 
-        Craft::$app->response->cookies->add(new Cookie([
-            'name' => self::COOKIE_NAME,
-            'value' => json_encode($keys),
-            'expire' => time() + Plugin::getInstance()->getSettings()->cookieLifetimeInSeconds,
-        ]));
+        $this->_setKeysOnCookie($keys);
+    }
+
+    private function _removeAllFromCookie()
+    {
+        $this->_setKeysOnCookie([]);
+    }
+
+    private function _removeFromCookie(string $keyToRemove)
+    {
+        $keys = array_filter(
+            $this->_getKeysFromCookie(),
+            fn ($key) => $key !== $keyToRemove,
+        );
+
+        $this->_setKeysOnCookie($keys);
     }
 
     private function _getKeysFromCookie(): array
@@ -113,5 +133,14 @@ class GuardService extends Component
         $cookie = $cookies->getValue(self::COOKIE_NAME);
 
         return json_decode($cookie) ?: [];
+    }
+
+    private function _setKeysOnCookie(array $keys)
+    {
+        Craft::$app->response->cookies->add(new Cookie([
+            'name' => self::COOKIE_NAME,
+            'value' => json_encode($keys),
+            'expire' => time() + Plugin::getInstance()->getSettings()->cookieLifetimeInSeconds,
+        ]));
     }
 }

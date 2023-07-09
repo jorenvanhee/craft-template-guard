@@ -1,3 +1,44 @@
 {% do craft.templateGuard.protect('password', 'guard-key') %}
 
 <h1>Protected page</h1>
+
+<form
+    action=""
+    method="post"
+>
+    {{ csrfInput({ name: 'csrf-token' }) }}
+    {{ actionInput('template-guard/sessions/delete') }}
+
+    <button
+        type="submit"
+        id="log_out"
+    >Log out</button>
+</form>
+
+<form
+    action=""
+    method="post"
+>
+    {{ csrfInput({ name: 'csrf-token' }) }}
+    {{ actionInput('template-guard/sessions/delete') }}
+    <input type="hidden" name="key" value="guard-key">
+
+    <button
+        type="submit"
+        id="log_out_specific_key"
+    >Log out specific key</button>
+</form>
+
+<form
+    action=""
+    method="post"
+>
+    {{ csrfInput({ name: 'csrf-token' }) }}
+    {{ actionInput('template-guard/sessions/delete') }}
+    <input type="hidden" name="key" value="incorrect-key">
+
+    <button
+        type="submit"
+        id="log_out_incorrect_key"
+    >Log out incorrect key</button>
+</form>

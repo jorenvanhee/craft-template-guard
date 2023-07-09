@@ -24,4 +24,15 @@ class SessionsController extends Controller
 
         return $this->renderTemplate('template-guard/login', [], View::TEMPLATE_MODE_CP);
     }
+
+    public function actionDelete(): Response
+    {
+        $this->requirePostRequest();
+
+        $key = $this->request->getBodyParam('key');
+
+        Plugin::getInstance()->guard->logout($key);
+
+        return $this->redirect($this->request->referrer);
+    }
 }

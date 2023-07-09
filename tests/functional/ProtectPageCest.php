@@ -4,7 +4,7 @@ use jorenvanhee\templateguard\records\LoginAttempt;
 
 class ProtectPageCest
 {
-    public function _before()
+    public function _after()
     {
         LoginAttempt::deleteAll();
     }
@@ -88,5 +88,28 @@ class ProtectPageCest
         $I->click('Login');
 
         $I->see('Protected page');
+    }
+
+    public function bypassMaxLoginAttempts(\FunctionalTester $I)
+    {
+        $I->amGoingTo('fail at bypassing the max login attempts protection');
+
+        $I->amOnPage('https://localhost/protect-page');
+        $I->dontSee('Protected page');
+
+        // 5 attempts
+        for ($i = 1; $i <= 5; $i++) {
+            $I->fillField('password', 'wrong-password');
+            $I->click('Login');
+        }
+
+        $I->amGoingTo('add a param to the url and try to bypass the max login attempts');
+        $I->amOnPage('https://localhost/protect-page?param=1');
+
+        // 6th attempt on same url with different query param
+        $I->fillField('password', 'wrong-password');
+        $I->click('Login');
+
+        $I->see('Too many attempts, try again later.');
     }
 }

@@ -13,7 +13,7 @@ class GuardService extends Component
     const COOKIE_NAME = 'CraftTemplateGuard';
     const MAX_KEYS = 10;
 
-    public function protect(array $passwords = [], ?string $key = null)
+    public function protect(array $passwords = [], string $key)
     {
         $key = $this->_generateKey($key);
         $passwordAttempt = Craft::$app->request->getParam('password');
@@ -30,12 +30,12 @@ class GuardService extends Component
         $this->_redirectToLoginPage();
     }
 
-    private function _generateKey(?string $key = null): string
+    private function _generateKey(string $key): string
     {
         // The length of the key will be 40 chars (sha1). We'll use this
         // predictable length to check how many keys we can store in
         // one cookie.
-        return sha1($key ?: $this->_defaultKey());
+        return sha1($key);
     }
 
     private function _loggedIn(string $key): bool
@@ -82,11 +82,6 @@ class GuardService extends Component
         }
 
         $this->_addToCookie($key);
-    }
-
-    private function _defaultKey(): string
-    {
-        return $this->_protectedUrl();
     }
 
     private function _protectedUrl()

@@ -3,6 +3,7 @@
 namespace jorenvanhee\templateguard\services;
 
 use Craft;
+use InvalidArgumentException;
 use craft\helpers\UrlHelper;
 use jorenvanhee\templateguard\Plugin;
 use yii\base\Component;
@@ -13,8 +14,12 @@ class GuardService extends Component
     const COOKIE_NAME = 'CraftTemplateGuard';
     const MAX_KEYS = 10;
 
-    public function protect(array $passwords = [], string $key)
+    public function protect(array $passwords = [], ?string $key = null)
     {
+        if ($key === null) {
+            throw new InvalidArgumentException("A key describing the protected page(s) must be provided as the second argument to the protect method.\nExample: {% do craft.templateGuard.protect('Pa\$\$w0rd', 'secret-page') %}");
+        }
+
         $key = $this->_generateKey($key);
         $passwordAttempt = Craft::$app->request->getParam('password');
         $passwords = array_filter($passwords);

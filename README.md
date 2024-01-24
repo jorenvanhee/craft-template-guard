@@ -4,7 +4,7 @@ Password protect any page or entry in Craft CMS.
 - Protect one or more pages.
 - Protect multiple entries each with their own password.
 - Customize the login page.
-- Add log out buttons.
+- Add log out button.
 
 ## Quick start
 
@@ -76,6 +76,20 @@ Add this line to the template(s) rendering your entries.
 ```
 
 > ❗️ Only the templates with this line of code will be protected. Please check if your entry is split up into multiple pages.
+
+### Add log out button
+
+```twig
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('template-guard/sessions/delete') }}
+    <input type="hidden" name="key" value="secret-page">
+
+    <button type="submit">Log out</button>
+</form>
+```
+
+> ℹ️ Omit the hidden `key` input to log out from all template guard instances.
 
 ## Configuration
 

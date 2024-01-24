@@ -1,5 +1,13 @@
 # Release Notes for Template Guard
 
+## 3.0.0 - 2024-01-24 [CRITICAL]
+> [!WARNING]  
+> The `key` argument on the protect method is now mandatory, `craft.templateGuard.protect('password', 'secret-page-key')`. Previously, if the key argument was omitted, the system would default to the current URL. This resulted in the potential bypassing of the `maxLoginAttempts` rule.
+
+- Make the `key` argument required.
+- Improve documentation.
+- Add log out support.
+
 ## 2.1.0 - 2022-10-07
 - Added more settings: `cookieLifetimeInSeconds`, `maxLoginAttempts` and `maxLoginAttemptsPeriodInSeconds`.
 
@@ -13,7 +21,8 @@
 - Added `X-Robots-Tag: noindex` header to login route.
 
 ## 1.1.0 - 2022-03-29
-> {tip} You can now provide an array of passwords `{% do craft.templateGuard.protect(['passwords1', 'passwords2']) %}`. Any of the passwords provided in the array can be used to log in.
+> [!TIP]
+> You can now provide an array of passwords `{% do craft.templateGuard.protect(['passwords1', 'passwords2']) %}`. Any of the passwords provided in the array can be used to log in.
 
 - Added support for multiple passwords on one page.
 - Added tests.

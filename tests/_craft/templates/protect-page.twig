@@ -2,11 +2,8 @@
 
 <h1>Protected page</h1>
 
-<form
-    action=""
-    method="post"
->
-    {{ csrfInput({ name: 'csrf-token' }) }}
+<form method="post">
+    {{ csrfInput() }}
     {{ actionInput('template-guard/sessions/delete') }}
 
     <button
@@ -15,11 +12,8 @@
     >Log out</button>
 </form>
 
-<form
-    action=""
-    method="post"
->
-    {{ csrfInput({ name: 'csrf-token' }) }}
+<form method="post">
+    {{ csrfInput() }}
     {{ actionInput('template-guard/sessions/delete') }}
     <input type="hidden" name="key" value="guard-key">
 
@@ -29,11 +23,8 @@
     >Log out specific key</button>
 </form>
 
-<form
-    action=""
-    method="post"
->
-    {{ csrfInput({ name: 'csrf-token' }) }}
+<form method="post">
+    {{ csrfInput() }}
     {{ actionInput('template-guard/sessions/delete') }}
     <input type="hidden" name="key" value="incorrect-key">
 

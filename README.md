@@ -102,8 +102,8 @@ You can also create a configuration file: `config/template-guard.php`.
 return [
     '*' => [
         // This template will be used for the login page. Leave empty for the
-        // default. Take a look at `src/templates/login.twig` in the plugin
-        // repository to develop your own custom template.
+        // default. Take a look at `src/templates/custom-login-example.twig`
+        // in the plugin repository to develop your own custom template.
         'template' => '',
         
         // The URI for the login page.

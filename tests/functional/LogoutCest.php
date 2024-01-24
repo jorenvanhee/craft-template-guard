@@ -1,7 +1,5 @@
 <?php
 
-use jorenvanhee\templateguard\records\LoginAttempt;
-
 class LogoutCest
 {
     public function logout(\FunctionalTester $I)

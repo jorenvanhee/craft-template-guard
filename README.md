@@ -3,8 +3,8 @@ Password protect any page or entry in Craft CMS.
 
 - Protect one or more pages.
 - Protect multiple entries each with their own password.
-- Customize the login page.
-- Add log out button.
+- Customize the login page to match your site's design.
+- Easily add log out button.
 
 ## Quick start
 
@@ -18,7 +18,7 @@ composer require jorenvanhee/craft-template-guard
 
 ## Usage
 
-This plugin gives you access to a protect method in your templates. This will redirect users to a login page.
+This plugin provides a `protect` method in your templates, redirecting users to a login page.
 
 ```twig
 {% do craft.templateGuard.protect('password', 'key') %}
@@ -32,20 +32,19 @@ The password your users need to provide before accessing the page. You can also 
 
 #### Key (string)
 
-You can identify a protected area on your site using the key argument. When logged in to a page with a certain key, other pages using the same key will also be accessible.
+Identify a protected area on your site using the key argument. When logged in to a page with a specific key, other pages using the same key will also be accessible.
 
 ## Examples
 
 ### Protect a single page
 
-The easiest way to get started is by adding the following line of code to the template you want to protect.
+Get started quickly by adding the following code to the template you want to protect.
 
 ```twig
 {% do craft.templateGuard.protect('Pa$$w0rd', 'secret-page') %}
 ```
 
-You can also use a password that was stored on the entry.
-
+You can also use a password stored on the entry.
 
 ```twig
 {% do craft.templateGuard.protect(entry.myPasswordField, 'secret-page') %}
@@ -75,7 +74,7 @@ Add this line to the template(s) rendering your entries.
 {% do craft.templateGuard.protect(entry.myPasswordField, entry.uid) %}
 ```
 
-> ❗️ Only the templates with this line of code will be protected. Please check if your entry is split up into multiple pages.
+> ❗️ Only templates with this line of code will be protected. Ensure your entry is not split across multiple pages.
 
 ### Add log out button
 

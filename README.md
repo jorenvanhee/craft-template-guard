@@ -34,9 +34,9 @@ The password your users need to provide before accessing the page. You can also 
 
 You can identify a protected area on your site using the key argument. When logged in to a page with a certain key, other pages using the same key will also be accessible.
 
-### Examples
+## Examples
 
-#### Protect a single page
+### Protect a single page
 
 The easiest way to get started is by adding the following line of code to the template you want to protect.
 
@@ -57,7 +57,7 @@ Provide multiple passwords: any of the passwords provided in the array can be us
 {% do craft.templateGuard.protect(['password1', 'password2'], 'secret-page') %}
 ```
 
-#### Protect multiple pages with the same password
+### Protect multiple pages with the same password
 
 The second argument (key) identifies a protected area on your site. When logged in to a page with a certain key, other pages using the same key will also be accessible.
 
@@ -67,7 +67,7 @@ Add this line to every template you want to protect with that password.
 {% do craft.templateGuard.protect('Pa$$w0rd', 'secret-pages-group') %}
 ```
 
-#### Protect multiple entries each with their own password
+### Protect multiple entries each with their own password
 
 Add this line to the template(s) rendering your entries.
 

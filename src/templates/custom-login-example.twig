@@ -1,0 +1,21 @@
+{% set error = craft.app.session.getFlash('error') %}
+
+<h1>Login</h1>
+
+<form
+    method="post"
+    action="{{ craft.app.request.getParam('ref') }}"
+>
+    {{ csrfInput() }}
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+
+    <button type="submit">Login</button>
+</form>
+
+{% if error %}
+    <div role="alert">
+        <p>{{ error }}</p>
+    </div>
+{% endif %}

@@ -1,5 +1,8 @@
 # Release Notes for Template Guard
 
+## 3.1.0 - 2024-02-18
+- Added support for Craft CMS 5.0.0-beta.2 or newer.
+
 ## 3.0.0 - 2024-01-24 [CRITICAL]
 > [!WARNING]  
 > The `key` argument on the protect method is now mandatory, `craft.templateGuard.protect('password', 'secret-page-key')`. Previously, if the key argument was omitted, the system would default to the current URL. This resulted in the potential bypassing of the `maxLoginAttempts` rule.

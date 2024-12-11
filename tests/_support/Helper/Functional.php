@@ -6,5 +6,16 @@ namespace Helper;
 
 class Functional extends \Codeception\Module
 {
+    public function seeExceptionThrown(callable $throwingFunction)
+    {
+        $exceptionThrown = false;
 
+        try {
+            $throwingFunction();
+        } catch (\Exception $e) {
+            $exceptionThrown = true;
+        }
+
+        $this->assertTrue($exceptionThrown);
+    }
 }

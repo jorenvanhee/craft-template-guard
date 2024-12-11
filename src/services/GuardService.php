@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use craft\helpers\UrlHelper;
 use jorenvanhee\templateguard\Plugin;
 use yii\base\Component;
+use yii\web\BadRequestHttpException;
 use yii\web\Cookie;
 
 class GuardService extends Component
@@ -42,6 +43,20 @@ class GuardService extends Component
         } else {
             $this->_removeFromCookie($this->_generateKey($key));
         }
+    }
+
+    public function loginFormAction(): string
+    {
+        $ref = Craft::$app->security->validateData(
+            Craft::$app->request->getParam('ref'),
+            Craft::$app->getConfig()->getGeneral()->securityKey,
+        );
+
+        if ($ref === false) {
+            throw new BadRequestHttpException('The ref query param is missing or invalid.');
+        }
+
+        return $ref;
     }
 
     private function _generateKey(string $key): string
@@ -100,7 +115,10 @@ class GuardService extends Component
 
     private function _protectedUrl()
     {
-        return Craft::$app->request->absoluteUrl;
+        return Craft::$app->security->hashData(
+            Craft::$app->request->absoluteUrl,
+            Craft::$app->getConfig()->getGeneral()->securityKey,
+        );
     }
 
     private function _setError(string $error)

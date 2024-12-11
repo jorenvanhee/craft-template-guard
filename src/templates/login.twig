@@ -16,7 +16,7 @@
         <form
             id="login-form"
             method="post"
-            action="{{ craft.app.request.getParam('ref') }}"
+            action="{{ craft.templateGuard.loginFormAction() }}"
         >
 
             {{ csrfInput({ name: 'csrf-token' }) }}

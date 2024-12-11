@@ -10,4 +10,9 @@ class TemplateGuardVariable
     {
         Plugin::getInstance()->guard->protect((array) $passwords, $key);
     }
+
+    public function loginFormAction()
+    {
+        return Plugin::getInstance()->guard->loginFormAction();
+    }
 }

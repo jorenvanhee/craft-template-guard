@@ -1,5 +1,11 @@
 # Release Notes for Template Guard
 
+## 4.0.0 - 2024-12-11 [CRITICAL]
+> [!WARNING]
+> If you're using a custom login template you'll have to replace `action="{{ craft.app.request.getParam('ref') }}"` with `action="{{ craft.templateGuard.loginFormAction() }}"`.
+
+- The `ref` query param used on the login page is now protected against tampering.
+
 ## 3.1.0 - 2024-02-18
 - Added support for Craft CMS 5.0.0-beta.2 or newer.
 

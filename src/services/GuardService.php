@@ -100,7 +100,7 @@ class GuardService extends Component
 
     private function _protectedUrl()
     {
-        return Craft::$app->request->absoluteUrl;
+        return Craft::$app->security->hashData(Craft::$app->request->absoluteUrl);
     }
 
     private function _setError(string $error)

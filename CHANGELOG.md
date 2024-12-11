@@ -1,5 +1,8 @@
 # Release Notes for Template Guard
 
+## 3.2.0 - 2024-12-11
+- Fixed XSS vulnerability
+
 ## 3.1.0 - 2024-02-18
 - Added support for Craft CMS 5.0.0-beta.2 or newer.
 

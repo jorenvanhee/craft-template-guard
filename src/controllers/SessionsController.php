@@ -7,6 +7,7 @@ use craft\web\Controller;
 use craft\web\Response;
 use craft\web\View;
 use jorenvanhee\templateguard\Plugin;
+use yii\web\BadRequestHttpException;
 
 class SessionsController extends Controller
 {
@@ -14,15 +15,24 @@ class SessionsController extends Controller
 
     public function actionCreate(): Response
     {
+        $ref = Craft::$app->request->getParam('ref');
+        if ($ref) {
+            $value = Craft::$app->security->validateData($ref);
+
+            if ($value === false) {
+                throw new BadRequestHttpException('Request contained an invalid query param');
+            }
+        }
+
         $settings = Plugin::getInstance()->getSettings();
 
         Craft::$app->response->headers->set('X-Robots-Tag', 'noindex');
 
         if ($settings->template) {
-            return $this->renderTemplate($settings->template, [], View::TEMPLATE_MODE_SITE);
+            return $this->renderTemplate($settings->template, ['ref' => $ref ? $value : null], View::TEMPLATE_MODE_SITE);
         }
 
-        return $this->renderTemplate('template-guard/login', [], View::TEMPLATE_MODE_CP);
+        return $this->renderTemplate('template-guard/login', ['ref' => $ref ? $value : null], View::TEMPLATE_MODE_CP);
     }
 
     public function actionDelete(): Response
